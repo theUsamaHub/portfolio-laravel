@@ -1,0 +1,9 @@
+.tabs { border-bottom: 1px solid var(--border-color); }
+.tabs-nav { @include flex-center; gap: 0; overflow-x: auto; }
+.tab-item {
+    padding: 0.75rem 1.25rem; font-size: 0.9375rem; font-weight: 500;
+    color: var(--text-muted); border-bottom: 2px solid transparent;
+    transition: all var(--transition); white-space: nowrap;
+    &:hover { color: var(--text-primary); }
+    &.active { color: var(--color-primary); border-bottom-color: var(--color-primary); }
+}

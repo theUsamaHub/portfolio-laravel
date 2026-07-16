@@ -1,0 +1,58 @@
+// VoiceBox - Buttons
+
+.vb-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 24px;
+    font-family: var(--vb-font-body);
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    border: 2px solid transparent;
+    border-radius: 0;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-decoration: none;
+
+    &:disabled, &.disabled { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
+    &:focus-visible { box-shadow: var(--vb-focus); }
+
+    &-primary {
+        background: var(--vb-primary);
+        color: var(--vb-tertiary) !important;
+        border-color: var(--vb-primary);
+        &:hover { background: var(--vb-secondary); border-color: var(--vb-secondary); color: var(--vb-tertiary) !important; }
+        &:active { background: #DC2626; border-color: #DC2626; }
+    }
+
+    &-secondary {
+        background: transparent;
+        color: var(--vb-primary) !important;
+        border-color: var(--vb-primary);
+        &:hover { background: var(--vb-primary); color: var(--vb-tertiary) !important; }
+        &:active { background: #262626; }
+    }
+
+    &-ghost {
+        background: transparent;
+        color: var(--vb-primary) !important;
+        border: none;
+        &:hover { color: var(--vb-secondary) !important; }
+        &:active { color: #DC2626 !important; }
+    }
+
+    &-destructive {
+        background: var(--vb-secondary);
+        color: var(--vb-tertiary) !important;
+        border-color: var(--vb-secondary);
+        &:hover { background: #DC2626; border-color: #DC2626; }
+        &:active { background: #B91C1C; border-color: #B91C1C; }
+    }
+
+    &-sm { padding: 6px 16px; font-size: 12px; }
+    &-lg { padding: 14px 32px; font-size: 16px; }
+}

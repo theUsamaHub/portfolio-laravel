@@ -1,0 +1,25 @@
+.grid { display: grid; gap: 1.5rem; }
+.grid-2 { grid-template-columns: 1fr; @include respond-to('sm') { grid-template-columns: repeat(2, 1fr); } }
+.grid-3 { grid-template-columns: 1fr; @include respond-to('sm') { grid-template-columns: repeat(2, 1fr); } @include respond-to('lg') { grid-template-columns: repeat(3, 1fr); } }
+.grid-4 { grid-template-columns: 1fr; @include respond-to('sm') { grid-template-columns: repeat(2, 1fr); } @include respond-to('lg') { grid-template-columns: repeat(4, 1fr); } }
+.col-span-2 { grid-column: span 1; @include respond-to('sm') { grid-column: span 2; } }
+.col-span-3 { grid-column: span 1; @include respond-to('sm') { grid-column: span 2; } @include respond-to('lg') { grid-column: span 3; } }
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-1 { gap: 0.25rem; }
+.gap-2 { gap: 0.5rem; }
+.gap-3 { gap: 0.75rem; }
+.gap-4 { gap: 1rem; }
+.gap-6 { gap: 1.5rem; }
+.gap-8 { gap: 2rem; }
+.hidden { display: none; }
+.hidden-sm { @include respond-to('sm') { display: block; } }
+.hidden-md { @include respond-to('md') { display: block; } }
+.hidden-lg { @include respond-to('lg') { display: block; } }
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }

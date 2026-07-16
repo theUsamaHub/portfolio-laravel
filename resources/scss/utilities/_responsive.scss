@@ -1,0 +1,3 @@
+.visible { visibility: visible; }
+.invisible { visibility: hidden; }
+.sr-only-focusable:focus { @extend .sr-only; }

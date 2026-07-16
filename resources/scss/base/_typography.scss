@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+body { font-family: var(--font-body); color: var(--text-primary); }
+
+h1, h2, h3, h4, h5, h6 {
+    @include heading-primary;
+    margin-bottom: 0.5em;
+}
+
+h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); }
+h2 { font-size: clamp(2rem, 4vw, 3.5rem); }
+h3 { font-size: clamp(1.5rem, 3vw, 2.5rem); }
+h4 { font-size: clamp(1.25rem, 2vw, 1.75rem); }
+h5 { font-size: clamp(1.1rem, 1.5vw, 1.25rem); }
+h6 { font-size: 1rem; }
+
+p { margin-bottom: 1em; line-height: 1.7; }
+
+a {
+    color: var(--color-primary);
+    transition: color var(--transition);
+
+    &:hover { color: var(--color-primary-hover); }
+    &:focus-visible { @include focus-ring; }
+}
+
+strong, b { font-weight: 600; }
+
+small { font-size: var(--text-sm, 0.875rem); }

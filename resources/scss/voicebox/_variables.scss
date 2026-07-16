@@ -1,0 +1,66 @@
+// VoiceBox Design System - Variables
+// Bold, opinionated, magazine-style editorial design
+
+:root {
+    // Brand Palette
+    --vb-primary: #0A0A0A;
+    --vb-secondary: #EF4444;
+    --vb-tertiary: #FAFAFA;
+
+    // Surface Palette
+    --vb-bg: #FAFAFA;
+    --vb-surface: #F5F5F5;
+    --vb-surface-raised: #E5E5E5;
+
+    // Content Palette
+    --vb-text: #0A0A0A;
+    --vb-text-secondary: #525252;
+    --vb-text-tertiary: #A3A3A3;
+
+    // Border Palette
+    --vb-border-subtle: #E5E5E5;
+    --vb-border-medium: #D4D4D4;
+    --vb-border-strong: #0A0A0A;
+
+    // Semantic
+    --vb-success: #16A34A;
+    --vb-warning: #CA8A04;
+    --vb-error: #EF4444;
+
+    // Typography
+    --vb-font-display: 'Archivo Black', Impact, 'Arial Black', sans-serif;
+    --vb-font-body: 'Work Sans', -apple-system, 'Segoe UI', Helvetica, sans-serif;
+    --vb-font-mono: 'Space Mono', 'Courier New', Consolas, monospace;
+
+    // Spacing
+    --vb-space-xs: 4px;
+    --vb-space-sm: 8px;
+    --vb-space-md: 16px;
+    --vb-space-lg: 24px;
+    --vb-space-xl: 32px;
+    --vb-space-2xl: 48px;
+    --vb-space-3xl: 64px;
+    --vb-space-4xl: 96px;
+
+    // No shadows - flat design
+    --vb-shadow: none;
+
+    // Focus ring
+    --vb-focus: 0 0 0 2px #FAFAFA, 0 0 0 4px #0A0A0A;
+}
+
+// Dark mode
+[data-theme="dark"] {
+    --vb-primary: #FAFAFA;
+    --vb-secondary: #EF4444;
+    --vb-tertiary: #0A0A0A;
+    --vb-bg: #0A0A0A;
+    --vb-surface: #171717;
+    --vb-surface-raised: #262626;
+    --vb-text: #FAFAFA;
+    --vb-text-secondary: #A3A3A3;
+    --vb-text-tertiary: #525252;
+    --vb-border-subtle: #262626;
+    --vb-border-medium: #404040;
+    --vb-border-strong: #FAFAFA;
+}

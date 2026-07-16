@@ -1,0 +1,389 @@
+// VoiceBox - Page Sections
+
+// Hero
+.vb-hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 100px;
+    position: relative;
+    overflow: hidden;
+}
+
+.vb-hero-content { max-width: 55%; @media (max-width: 1024px) { max-width: 100%; } }
+
+.vb-hero-title {
+    font-family: var(--vb-font-display);
+    font-size: clamp(2.5rem, 7vw, 64px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--vb-primary);
+    margin-bottom: 24px;
+    word-wrap: break-word;
+}
+
+.vb-hero-subtitle {
+    font-size: clamp(1.125rem, 2vw, 20px);
+    color: var(--vb-text-secondary);
+    line-height: 1.65;
+    max-width: 600px;
+    margin-bottom: 32px;
+}
+
+.vb-hero-cta { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 48px; }
+
+.vb-hero-image {
+    display: none;
+    @media (min-width: 1024px) {
+        display: block;
+        position: absolute;
+        right: 5%;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 300px;
+        height: 400px;
+    }
+    @media (min-width: 1280px) {
+        width: 360px;
+        height: 460px;
+        right: 8%;
+    }
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border: 4px solid var(--vb-primary);
+    }
+}
+
+.vb-hero-stats {
+    display: flex;
+    gap: 48px;
+    padding-top: 32px;
+    border-top: 2px solid var(--vb-primary);
+    flex-wrap: wrap;
+}
+
+.vb-hero-stat-value {
+    font-family: var(--vb-font-display);
+    font-size: clamp(1.5rem, 3vw, 32px);
+    color: var(--vb-tertiary);
+}
+
+.vb-hero-stat-label { font-size: 12px; color: var(--vb-text-tertiary); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; }
+
+// About
+.vb-about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+    @media (min-width: 1024px) { grid-template-columns: 1fr 1fr; align-items: start; }
+}
+
+.vb-about-image {
+    position: relative;
+    img { width: 100%; border: 4px solid var(--vb-primary); }
+}
+
+.vb-about-image-badge {
+    position: absolute;
+    bottom: -16px;
+    right: -16px;
+    background: var(--vb-secondary);
+    color: var(--vb-tertiary);
+    padding: 16px 24px;
+    font-family: var(--vb-font-display);
+    font-size: 24px;
+}
+
+.vb-about-highlights {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin: 24px 0;
+    @media (min-width: 768px) { grid-template-columns: repeat(2, 1fr); }
+}
+
+.vb-about-highlight {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--vb-text-secondary);
+    padding: 8px 0;
+    border-bottom: 1px solid var(--vb-border-subtle);
+}
+
+// Skills
+.vb-skills-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    @media (min-width: 768px) { grid-template-columns: repeat(2, 1fr); }
+    @media (min-width: 1024px) { grid-template-columns: repeat(3, 1fr); }
+}
+
+.vb-skill-card {
+    @extend .vb-card;
+    .vb-skill-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .vb-skill-name { font-weight: 600; font-size: 16px; }
+    .vb-skill-bar { height: 4px; background: var(--vb-border-subtle); overflow: hidden; }
+    .vb-skill-bar-fill { height: 100%; background: var(--vb-primary); transition: width 0.8s ease; }
+    .vb-skill-pct { font-size: 12px; color: var(--vb-text-tertiary); font-weight: 500; }
+}
+
+// Projects
+.vb-project-card {
+    @extend .vb-card;
+    overflow: hidden;
+    padding: 0;
+}
+
+.vb-project-image {
+    overflow: hidden;
+    aspect-ratio: 16/10;
+    img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+    &:hover img { transform: scale(1.03); }
+}
+
+.vb-project-body { padding: 24px; }
+
+.vb-project-title {
+    font-family: var(--vb-font-display);
+    font-size: 20px;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+}
+
+.vb-project-desc {
+    font-size: 14px;
+    color: var(--vb-text-secondary);
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.vb-project-tech { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+
+.vb-project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--vb-secondary);
+    text-decoration: none;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--vb-border-subtle);
+    transition: gap 0.15s;
+    &:hover { gap: 10px; }
+}
+
+// Blog
+.vb-blog-card {
+    @extend .vb-card;
+    padding: 0;
+    overflow: hidden;
+}
+
+.vb-blog-image {
+    overflow: hidden;
+    aspect-ratio: 16/9;
+    img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+    &:hover img { transform: scale(1.03); }
+}
+
+.vb-blog-body { padding: 24px; }
+
+.vb-blog-meta {
+    display: flex;
+    gap: 16px;
+    font-size: 12px;
+    color: var(--vb-text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.vb-blog-title {
+    font-family: var(--vb-font-display);
+    font-size: 22px;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+}
+
+.vb-blog-excerpt {
+    font-size: 14px;
+    color: var(--vb-text-secondary);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+// Services
+.vb-services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    @media (min-width: 768px) { grid-template-columns: repeat(2, 1fr); }
+    @media (min-width: 1024px) { grid-template-columns: repeat(3, 1fr); }
+}
+
+.vb-service-card {
+    @extend .vb-card;
+    text-align: center;
+    padding: 48px 24px;
+    border-top: 4px solid var(--vb-border-subtle);
+    &:hover { border-top-color: var(--vb-secondary); }
+}
+
+.vb-service-icon {
+    width: 48px;
+    height: 48px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 24px;
+    font-size: 24px;
+}
+
+.vb-service-title {
+    font-family: var(--vb-font-display);
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+.vb-service-desc {
+    font-size: 14px;
+    color: var(--vb-text-secondary);
+    line-height: 1.6;
+}
+
+.vb-service-features { text-align: left; margin-top: 24px; }
+.vb-service-feature {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0;
+    font-size: 14px;
+    color: var(--vb-text-secondary);
+    border-bottom: 1px solid var(--vb-border-subtle);
+}
+
+// Testimonials
+.vb-testimonial-card {
+    @extend .vb-card;
+    text-align: center;
+}
+
+.vb-testimonial-quote {
+    font-size: 16px;
+    font-style: italic;
+    color: var(--vb-text-secondary);
+    line-height: 1.65;
+    margin-bottom: 24px;
+    position: relative;
+    &::before {
+        content: '\201C';
+        font-family: var(--vb-font-display);
+        font-size: 48px;
+        color: var(--vb-secondary);
+        position: absolute;
+        top: -20px;
+        left: 0;
+        line-height: 1;
+    }
+}
+
+.vb-testimonial-name { font-weight: 600; font-size: 14px; }
+.vb-testimonial-role { font-size: 12px; color: var(--vb-text-tertiary); }
+
+// Timeline
+.vb-timeline { position: relative; padding-left: 32px; }
+.vb-timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--vb-primary);
+}
+
+.vb-timeline-item { position: relative; padding-bottom: 32px; }
+.vb-timeline-dot {
+    position: absolute;
+    left: -29px;
+    top: 4px;
+    width: 12px;
+    height: 12px;
+    background: var(--vb-primary);
+}
+
+.vb-timeline-date {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+    color: var(--vb-text-tertiary);
+    margin-bottom: 4px;
+}
+
+.vb-timeline-title { font-family: var(--vb-font-display); font-size: 20px; margin-bottom: 4px; }
+.vb-timeline-company { color: var(--vb-secondary); font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+.vb-timeline-desc { font-size: 14px; color: var(--vb-text-secondary); }
+
+// Contact
+.vb-contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+    @media (min-width: 1024px) { grid-template-columns: 1fr 1.5fr; }
+}
+
+.vb-contact-info-item {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.vb-contact-icon {
+    width: 40px;
+    height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid var(--vb-primary);
+    flex-shrink: 0;
+    color: var(--vb-primary);
+}
+
+.vb-contact-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; color: var(--vb-text-tertiary); }
+.vb-contact-value { font-size: 14px; font-weight: 500; }
+
+// Section headers
+.vb-section-header {
+    margin-bottom: 48px;
+    @media (min-width: 768px) { margin-bottom: 64px; }
+}
+
+.vb-section-title {
+    font-family: var(--vb-font-display);
+    font-size: clamp(2rem, 5vw, 38px);
+    margin-bottom: 8px;
+}
+
+// Filter
+.vb-filter { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+
+// Stats bar
+.vb-stats-bar {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    padding: 48px 0;
+    border-top: 2px solid var(--vb-primary);
+    border-bottom: 2px solid var(--vb-primary);
+    @media (min-width: 768px) { grid-template-columns: repeat(4, 1fr); text-align: center; }
+}

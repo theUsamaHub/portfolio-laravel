@@ -1,0 +1,45 @@
+// VoiceBox - Layout
+
+.vb-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    @media (max-width: 768px) { padding: 0 16px; }
+}
+
+.vb-section {
+    padding: 96px 0;
+    @media (max-width: 1024px) { padding: 64px 0; }
+    @media (max-width: 768px) { padding: 48px 0; }
+}
+
+.vb-section-dark {
+    background: var(--vb-primary);
+    color: var(--vb-tertiary);
+    .overline { color: var(--vb-secondary); }
+    h1, h2, h3, h4 { color: var(--vb-tertiary); }
+    p { color: #A3A3A3; }
+    a { color: var(--vb-tertiary); &:hover { color: var(--vb-secondary); } }
+    .vb-card { border-color: #262626; background: #171717; &:hover { border-color: var(--vb-secondary); } }
+}
+
+// Grid
+.vb-grid { display: grid; gap: 24px; }
+.vb-grid-2 { grid-template-columns: 1fr; @media (min-width: 768px) { grid-template-columns: repeat(2, 1fr); } }
+.vb-grid-3 { grid-template-columns: 1fr; @media (min-width: 768px) { grid-template-columns: repeat(2, 1fr); } @media (min-width: 1024px) { grid-template-columns: repeat(3, 1fr); } }
+.vb-grid-4 { grid-template-columns: repeat(2, 1fr); @media (min-width: 768px) { grid-template-columns: repeat(4, 1fr); } }
+.vb-span-2 { grid-column: span 1; @media (min-width: 768px) { grid-column: span 2; } }
+
+// Flex
+.vb-flex { display: flex; }
+.vb-flex-col { flex-direction: column; }
+.vb-flex-wrap { flex-wrap: wrap; }
+.vb-items-center { align-items: center; }
+.vb-justify-between { justify-content: space-between; }
+.vb-justify-center { justify-content: center; }
+.vb-gap-1 { gap: 4px; }
+.vb-gap-2 { gap: 8px; }
+.vb-gap-3 { gap: 16px; }
+.vb-gap-4 { gap: 24px; }
+.vb-gap-6 { gap: 32px; }

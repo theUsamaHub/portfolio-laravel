@@ -1,0 +1,93 @@
+@mixin respond-to($breakpoint) {
+    @if $breakpoint == 'sm' { @media (min-width: 640px) { @content; } }
+    @else if $breakpoint == 'md' { @media (min-width: 768px) { @content; } }
+    @else if $breakpoint == 'lg' { @media (min-width: 1024px) { @content; } }
+    @else if $breakpoint == 'xl' { @media (min-width: 1280px) { @content; } }
+    @else if $breakpoint == '2xl' { @media (min-width: 1536px) { @content; } }
+    @else if $breakpoint == 'max-sm' { @media (max-width: 639px) { @content; } }
+    @else if $breakpoint == 'max-md' { @media (max-width: 767px) { @content; } }
+    @else if $breakpoint == 'max-lg' { @media (max-width: 1023px) { @content; } }
+}
+
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin flex-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@mixin flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1rem;
+
+    @include respond-to('sm') { padding: 0 1.5rem; }
+    @include respond-to('lg') { padding: 0 2rem; }
+}
+
+@mixin text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@mixin text-clamp($lines: 2) {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+@mixin focus-ring {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+@mixin section-padding {
+    padding: 4rem 0;
+
+    @include respond-to('lg') {
+        padding: 6rem 0;
+    }
+}
+
+@mixin heading-primary {
+    font-family: var(--font-heading);
+    color: var(--text-heading);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+@mixin heading-secondary {
+    font-family: var(--font-heading);
+    color: var(--color-primary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.875rem;
+}
+
+@mixin card {
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    transition: all var(--transition);
+
+    &:hover {
+        box-shadow: var(--shadow-md);
+        border-color: var(--border-color-hover);
+    }
+}

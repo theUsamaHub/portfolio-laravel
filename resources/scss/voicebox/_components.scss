@@ -1,0 +1,157 @@
+// VoiceBox - Components
+
+// Cards
+.vb-card {
+    background: var(--vb-bg);
+    border: 2px solid var(--vb-border-subtle);
+    border-radius: 0;
+    padding: 24px;
+    box-shadow: none;
+    transition: border-color 0.15s;
+    &:hover { border-color: var(--vb-primary); }
+}
+
+.vb-card-elevated {
+    background: var(--vb-bg);
+    border-top: 4px solid var(--vb-secondary);
+    border-left: 2px solid var(--vb-border-subtle);
+    border-right: 2px solid var(--vb-border-subtle);
+    border-bottom: 2px solid var(--vb-border-subtle);
+    border-radius: 0;
+    padding: 24px;
+}
+
+// Inputs
+.vb-input {
+    height: 44px;
+    background: var(--vb-bg);
+    border: 2px solid var(--vb-border-medium);
+    border-radius: 0;
+    padding: 8px 14px;
+    font-family: var(--vb-font-body);
+    font-size: 14px;
+    color: var(--vb-text);
+    width: 100%;
+    transition: border-color 0.15s;
+    &::placeholder { color: var(--vb-text-tertiary); }
+    &:focus { outline: none; border-color: var(--vb-primary); box-shadow: var(--vb-focus); }
+    &.error { border-color: var(--vb-error); }
+}
+
+.vb-textarea {
+    @extend .vb-input;
+    height: auto;
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+.vb-label {
+    display: block;
+    font-family: var(--vb-font-body);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--vb-text);
+    margin-bottom: 6px;
+}
+
+.vb-helper { font-size: 12px; color: var(--vb-text-secondary); margin-top: 4px; }
+.vb-error { font-size: 12px; color: var(--vb-error); margin-top: 4px; }
+
+// Chips / Tags
+.vb-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 14px;
+    border: 2px solid var(--vb-border-medium);
+    border-radius: 0;
+    font-family: var(--vb-font-body);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--vb-text-secondary);
+    transition: all 0.15s;
+    cursor: pointer;
+    background: transparent;
+
+    &:hover { border-color: var(--vb-primary); color: var(--vb-text); }
+    &.active, &.selected {
+        background: var(--vb-primary);
+        color: var(--vb-tertiary);
+        border-color: var(--vb-primary);
+    }
+}
+
+.vb-chip-status {
+    padding: 4px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-radius: 0;
+    border: 2px solid;
+    &-success { background: #F0FDF4; color: var(--vb-success); border-color: var(--vb-success); }
+    &-warning { background: #FEFCE8; color: var(--vb-warning); border-color: var(--vb-warning); }
+    &-error { background: #FEF2F2; color: var(--vb-error); border-color: var(--vb-error); }
+}
+
+// Divider
+.vb-divider {
+    border: none;
+    border-top: 1px solid var(--vb-border-subtle);
+    margin: 24px 0;
+}
+
+.vb-divider-strong {
+    border: none;
+    border-top: 2px solid var(--vb-primary);
+    margin: 24px 0;
+}
+
+// Pull quote
+.vb-pullquote {
+    border-left: 4px solid var(--vb-secondary);
+    padding: 16px 24px;
+    font-size: 20px;
+    font-style: italic;
+    color: var(--vb-text);
+    line-height: 1.65;
+    margin: 32px 0;
+}
+
+// List
+.vb-list-item {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--vb-border-subtle);
+    font-size: 16px;
+    transition: background 0.15s;
+    &:hover { background: var(--vb-surface); }
+}
+
+// Tooltip
+.vb-tooltip {
+    position: relative;
+    &::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-6px);
+        background: var(--vb-primary);
+        color: var(--vb-tertiary);
+        font-size: 12px;
+        font-weight: 600;
+        padding: 8px 14px;
+        border-radius: 0;
+        white-space: nowrap;
+        max-width: 220px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.15s;
+        z-index: 100;
+    }
+    &:hover::after { opacity: 1; }
+}

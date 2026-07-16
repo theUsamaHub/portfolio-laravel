@@ -1,0 +1,567 @@
+// VoiceBox Design System - Public Portfolio Only
+// Editorial, magazine-style, high-contrast black/white/red
+
+// === TOKENS ===
+$vbox-black: #0A0A0A;
+$vbox-red: #EF4444;
+$vbox-red-dark: #DC2626;
+$vbox-red-deep: #B91C1C;
+$vbox-white: #FAFAFA;
+$vbox-surface: #F5F5F5;
+$vbox-surface-raised: #E5E5E5;
+$vbox-text-secondary: #525252;
+$vbox-text-tertiary: #A3A3A3;
+$vbox-border-subtle: #E5E5E5;
+$vbox-border-medium: #D4D4D4;
+$vbox-border-strong: #0A0A0A;
+$vbox-success: #16A34A;
+$vbox-warning: #CA8A04;
+
+// === MIXINS ===
+@mixin vbox-flex-center { display: flex; align-items: center; justify-content: center; }
+@mixin vbox-flex-col { display: flex; flex-direction: column; }
+
+// === FONTS ===
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Work+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+
+$vbox-font-display: 'Archivo Black', Impact, 'Arial Black', sans-serif;
+$vbox-font-body: 'Work Sans', -apple-system, 'Segoe UI', Helvetica, sans-serif;
+$vbox-font-mono: 'Space Mono', 'Courier New', Consolas, monospace;
+
+// === BREAKPOINTS ===
+@mixin vbox-sm { @media (min-width: 640px) { @content; } }
+@mixin vbox-md { @media (min-width: 768px) { @content; } }
+@mixin vbox-lg { @media (min-width: 1024px) { @content; } }
+@mixin vbox-xl { @media (min-width: 1280px) { @content; } }
+@mixin vbox-max-md { @media (max-width: 767px) { @content; } }
+
+// === BASE RESET ===
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: $vbox-font-body;
+    font-size: 16px;
+    line-height: 1.7;
+    color: $vbox-black;
+    background: $vbox-white;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+// === SCROLLBAR ===
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: $vbox-white; }
+::-webkit-scrollbar-thumb { background: $vbox-black; }
+
+// === TYPOGRAPHY ===
+h1, h2, h3, h4, h5, h6 {
+    font-family: $vbox-font-display;
+    font-weight: 400;
+    color: $vbox-black;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+}
+
+.vbox-display { font-family: $vbox-font-display; font-size: clamp(2.5rem, 6vw, 3.5rem); line-height: 1.05; letter-spacing: -0.03em; }
+.vbox-headline { font-family: $vbox-font-display; font-size: clamp(1.75rem, 4vw, 2.375rem); line-height: 1.1; letter-spacing: -0.02em; }
+.vbox-subhead { font-family: $vbox-font-display; font-size: clamp(1.25rem, 2.5vw, 1.5rem); line-height: 1.2; letter-spacing: -0.01em; }
+.vbox-body-lg { font-size: 1.25rem; line-height: 1.65; }
+.vbox-body { font-size: 1rem; line-height: 1.7; }
+.vbox-body-sm { font-size: 0.875rem; line-height: 1.6; }
+.vbox-caption { font-size: 0.75rem; font-weight: 500; line-height: 1.5; letter-spacing: 0.01em; color: $vbox-text-secondary; }
+.vbox-overline { font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; line-height: 1.4; color: $vbox-text-secondary; }
+.vbox-code { font-family: $vbox-font-mono; font-size: 0.875rem; line-height: 1.6; }
+
+a { color: $vbox-black; text-decoration: none; transition: color 0.15s; }
+a:hover { color: $vbox-red; }
+
+// === CONTAINER ===
+.vbox-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    @include vbox-md { padding: 0 2rem; }
+    @include vbox-lg { padding: 0 3rem; }
+}
+
+// === SECTION SPACING ===
+.vbox-section { padding: 3rem 0; @include vbox-md { padding: 4rem 0; } @include vbox-lg { padding: 6rem 0; } }
+
+// === DIVIDER ===
+.vbox-divider { border: none; border-top: 2px solid $vbox-black; margin: 0; }
+.vbox-divider-thin { border: none; border-top: 1px solid $vbox-border-subtle; }
+.vbox-divider-red { border: none; border-top: 3px solid $vbox-red; }
+
+// === HEADER ===
+.vbox-header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: $vbox-white; border-bottom: 2px solid $vbox-black;
+}
+.vbox-header-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 4rem; padding: 0 1.5rem;
+    @include vbox-md { padding: 0 2rem; height: 4.5rem; }
+}
+.vbox-logo {
+    font-family: $vbox-font-display; font-size: 1.125rem; color: $vbox-black;
+    text-transform: uppercase; letter-spacing: 0.02em;
+    @include vbox-md { font-size: 1.25rem; }
+}
+.vbox-logo span { color: $vbox-red; }
+.vbox-nav { display: none; @include vbox-lg { display: flex; gap: 2rem; } }
+.vbox-nav-link {
+    font-size: 0.8125rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.06em; color: $vbox-black; padding: 0.25rem 0;
+    border-bottom: 2px solid transparent; transition: all 0.15s;
+    &:hover { color: $vbox-red; border-bottom-color: $vbox-red; }
+    &.active { border-bottom-color: $vbox-black; }
+}
+.vbox-header-actions { display: flex; align-items: center; gap: 0.75rem; }
+.vbox-theme-btn {
+    width: 2.5rem; height: 2.5rem; @include vbox-flex-center;
+    border: 2px solid $vbox-black; background: transparent;
+    cursor: pointer; transition: all 0.15s;
+    &:hover { background: $vbox-black; color: $vbox-white; }
+}
+.vbox-mobile-toggle {
+    display: flex; @include vbox-lg { display: none; }
+    width: 2.5rem; height: 2.5rem; @include vbox-flex-center;
+    border: 2px solid $vbox-black; background: transparent; cursor: pointer;
+}
+
+// === MOBILE MENU ===
+.vbox-mobile-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 999;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    &.active { opacity: 1; pointer-events: auto; }
+}
+.vbox-mobile-menu {
+    position: fixed; top: 0; right: -100%; width: 80%; max-width: 360px;
+    height: 100vh; background: $vbox-white; z-index: 1001;
+    border-left: 2px solid $vbox-black; padding: 2rem;
+    transition: right 0.3s ease;
+    &.active { right: 0; }
+}
+.vbox-mobile-nav { @include vbox-flex-col; gap: 0; }
+.vbox-mobile-link {
+    display: block; padding: 0.875rem 0; font-size: 1.125rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.04em; color: $vbox-black;
+    border-bottom: 1px solid $vbox-border-subtle; transition: color 0.15s;
+    &:hover { color: $vbox-red; }
+}
+.vbox-mobile-close {
+    position: absolute; top: 1rem; right: 1rem;
+    width: 2.5rem; height: 2.5rem; @include vbox-flex-center;
+    border: 2px solid $vbox-black; background: transparent; cursor: pointer;
+}
+
+// === BUTTONS ===
+.vbox-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    padding: 10px 24px; font-family: $vbox-font-body; font-size: 0.875rem;
+    font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+    border: 2px solid; cursor: pointer; transition: all 0.15s; border-radius: 0;
+    &:disabled, &.disabled { opacity: 0.35; cursor: not-allowed; }
+    &-primary { background: $vbox-black; color: $vbox-white; border-color: $vbox-black;
+        &:hover { background: $vbox-red; border-color: $vbox-red; color: $vbox-white; }
+        &:active { background: $vbox-red-dark; border-color: $vbox-red-dark; }
+    }
+    &-secondary { background: transparent; color: $vbox-black; border-color: $vbox-black;
+        &:hover { background: $vbox-black; color: $vbox-white; }
+        &:active { background: #262626; }
+    }
+    &-ghost { background: transparent; color: $vbox-black; border-color: transparent;
+        &:hover { color: $vbox-red; }
+    }
+    &-danger { background: $vbox-red; color: $vbox-white; border-color: $vbox-red;
+        &:hover { background: $vbox-red-dark; border-color: $vbox-red-dark; }
+    }
+    &-red { background: $vbox-red; color: $vbox-white; border-color: $vbox-red;
+        &:hover { background: $vbox-red-dark; border-color: $vbox-red-dark; }
+    }
+    &-sm { padding: 6px 16px; font-size: 0.75rem; }
+    &-lg { padding: 14px 32px; font-size: 1rem; }
+}
+
+// === CARDS ===
+.vbox-card {
+    background: $vbox-white; border: 2px solid $vbox-border-subtle;
+    border-radius: 0; padding: 1.5rem; transition: border-color 0.15s;
+    &:hover { border-color: $vbox-black; }
+}
+.vbox-card-elevated {
+    @extend .vbox-card;
+    border-top: 4px solid $vbox-red;
+}
+
+// === FORMS ===
+.vbox-input {
+    width: 100%; height: 44px; padding: 8px 14px;
+    background: $vbox-white; border: 2px solid $vbox-border-medium;
+    border-radius: 0; font-family: $vbox-font-body; font-size: 0.875rem;
+    color: $vbox-black; transition: border-color 0.15s;
+    &::placeholder { color: $vbox-text-tertiary; }
+    &:focus { outline: none; border-color: $vbox-black; box-shadow: 0 0 0 2px $vbox-white, 0 0 0 4px $vbox-black; }
+    &.is-invalid { border-color: $vbox-red; }
+}
+.vbox-textarea {
+    @extend .vbox-input; height: auto; min-height: 120px; resize: vertical;
+}
+.vbox-label {
+    display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.06em; color: $vbox-black; margin-bottom: 6px;
+}
+.vbox-helper { font-size: 0.75rem; color: $vbox-text-secondary; margin-top: 4px; }
+.vbox-error { font-size: 0.75rem; color: $vbox-red; margin-top: 4px; }
+
+// === CHIPS ===
+.vbox-chip {
+    display: inline-flex; align-items: center; padding: 4px 14px;
+    border: 2px solid $vbox-border-medium; border-radius: 0;
+    font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.04em; color: $vbox-text-secondary; cursor: pointer;
+    transition: all 0.15s; background: transparent;
+    &:hover { border-color: $vbox-black; color: $vbox-black; }
+    &.active { background: $vbox-black; color: $vbox-white; border-color: $vbox-black; }
+}
+
+// === HERO ===
+.vbox-hero {
+    min-height: 100vh; display: flex; align-items: flex-end;
+    padding-top: 4.5rem; position: relative; overflow: hidden;
+    border-bottom: 2px solid $vbox-black;
+}
+.vbox-hero-bg {
+    position: absolute; inset: 0; z-index: -1;
+    video, img { width: 100%; height: 100%; object-fit: cover; }
+    &::after {
+        content: ''; position: absolute; inset: 0;
+        background: linear-gradient(to top, $vbox-white 0%, transparent 50%);
+    }
+}
+.vbox-hero-content { position: relative; z-index: 1; padding-bottom: 3rem; }
+.vbox-hero-overline {
+    font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.12em; color: $vbox-red; margin-bottom: 1rem;
+}
+.vbox-hero-title {
+    font-family: $vbox-font-display; font-size: clamp(3rem, 8vw, 5rem);
+    line-height: 1; letter-spacing: -0.03em; margin-bottom: 1.5rem;
+    @include vbox-lg { font-size: clamp(4rem, 7vw, 5.5rem); }
+}
+.vbox-hero-subtitle {
+    font-size: 1.125rem; line-height: 1.65; color: $vbox-text-secondary;
+    max-width: 540px; margin-bottom: 2rem;
+    @include vbox-md { font-size: 1.25rem; }
+}
+.vbox-hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+.vbox-hero-image {
+    display: none; @include vbox-lg { display: block; position: absolute;
+    right: 3%; bottom: 3rem; width: 22rem; height: 28rem;
+    border: 3px solid $vbox-black; overflow: hidden; }
+    img { width: 100%; height: 100%; object-fit: cover; }
+}
+
+// === SECTION HEADERS ===
+.vbox-section-header { margin-bottom: 3rem; @include vbox-md { margin-bottom: 4rem; } }
+.vbox-section-overline {
+    font-size: 0.6875rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.12em; color: $vbox-red; margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 0.75rem;
+    &::after { content: ''; flex: 1; height: 1px; background: $vbox-border-medium; }
+}
+.vbox-section-title {
+    font-family: $vbox-font-display; font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.1; letter-spacing: -0.02em;
+}
+
+// === ABOUT ===
+.vbox-about-grid {
+    display: grid; gap: 2rem; @include vbox-lg { grid-template-columns: 1fr 1.5fr; gap: 4rem; align-items: start; }
+}
+.vbox-about-image {
+    border: 3px solid $vbox-black; overflow: hidden;
+    img { width: 100%; display: block; }
+}
+.vbox-about-stats {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;
+    margin-top: 2rem; padding-top: 2rem; border-top: 2px solid $vbox-black;
+}
+.vbox-stat-value {
+    font-family: $vbox-font-display; font-size: 2rem; color: $vbox-black;
+    @include vbox-md { font-size: 2.5rem; }
+}
+.vbox-stat-label { font-size: 0.8125rem; color: $vbox-text-secondary; text-transform: uppercase; letter-spacing: 0.04em; }
+
+// === SKILLS ===
+.vbox-skills-grid {
+    display: grid; gap: 0;
+    @include vbox-md { grid-template-columns: repeat(2, 1fr); }
+    @include vbox-lg { grid-template-columns: repeat(3, 1fr); }
+}
+.vbox-skill-item {
+    padding: 1.5rem; border: 1px solid $vbox-border-subtle;
+    transition: all 0.15s;
+    &:hover { border-color: $vbox-black; background: $vbox-surface; }
+}
+.vbox-skill-name { font-weight: 600; margin-bottom: 0.5rem; }
+.vbox-skill-bar { height: 3px; background: $vbox-border-subtle; margin-top: 0.75rem; }
+.vbox-skill-fill { height: 100%; background: $vbox-black; transition: width 1s ease; }
+
+// === PROJECTS ===
+.vbox-projects-grid {
+    display: grid; gap: 0;
+    @include vbox-md { grid-template-columns: repeat(2, 1fr); }
+}
+.vbox-project-card {
+    border: 1px solid $vbox-border-subtle; overflow: hidden;
+    transition: border-color 0.15s; display: flex; flex-direction: column;
+    &:hover { border-color: $vbox-black; }
+    &:hover .vbox-project-image img { transform: scale(1.03); }
+}
+.vbox-project-image {
+    overflow: hidden; aspect-ratio: 16/10;
+    img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+}
+.vbox-project-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+.vbox-project-category {
+    font-size: 0.6875rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.06em; color: $vbox-red; margin-bottom: 0.5rem;
+}
+.vbox-project-title {
+    font-family: $vbox-font-display; font-size: 1.25rem; line-height: 1.2;
+    letter-spacing: -0.01em; margin-bottom: 0.5rem;
+    @include vbox-md { font-size: 1.5rem; }
+}
+.vbox-project-desc {
+    font-size: 0.875rem; color: $vbox-text-secondary; line-height: 1.6;
+    margin-bottom: 1rem; flex: 1;
+}
+.vbox-project-tech { display: flex; flex-wrap: wrap; gap: 0.375rem; margin-bottom: 1rem; }
+.vbox-tech-tag {
+    font-size: 0.6875rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.04em; padding: 2px 8px; border: 1px solid $vbox-border-medium;
+    color: $vbox-text-secondary;
+}
+.vbox-project-links { display: flex; gap: 0.75rem; padding-top: 1rem; border-top: 1px solid $vbox-border-subtle; }
+
+// === BLOG ===
+.vbox-blog-grid {
+    display: grid; gap: 0;
+    @include vbox-md { grid-template-columns: repeat(2, 1fr); }
+    @include vbox-lg { grid-template-columns: repeat(3, 1fr); }
+}
+.vbox-blog-card {
+    border: 1px solid $vbox-border-subtle; overflow: hidden;
+    transition: border-color 0.15s;
+    &:hover { border-color: $vbox-black; }
+    &:hover .vbox-blog-image img { transform: scale(1.03); }
+}
+.vbox-blog-image {
+    overflow: hidden; aspect-ratio: 16/9;
+    img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+}
+.vbox-blog-body { padding: 1.5rem; }
+.vbox-blog-meta {
+    display: flex; gap: 1rem; font-size: 0.75rem; font-weight: 500;
+    color: $vbox-text-tertiary; text-transform: uppercase; letter-spacing: 0.04em;
+    margin-bottom: 0.75rem;
+}
+.vbox-blog-title {
+    font-family: $vbox-font-display; font-size: 1.125rem; line-height: 1.2;
+    margin-bottom: 0.5rem;
+    @include vbox-md { font-size: 1.25rem; }
+}
+.vbox-blog-excerpt { font-size: 0.875rem; color: $vbox-text-secondary; line-height: 1.6; }
+
+// === TESTIMONIALS ===
+.vbox-testimonials-grid {
+    display: grid; gap: 0;
+    @include vbox-md { grid-template-columns: repeat(2, 1fr); }
+    @include vbox-lg { grid-template-columns: repeat(3, 1fr); }
+}
+.vbox-testimonial-card {
+    border: 1px solid $vbox-border-subtle; padding: 2rem; text-align: center;
+}
+.vbox-testimonial-quote {
+    font-size: 1rem; font-style: italic; color: $vbox-text-secondary;
+    line-height: 1.7; margin-bottom: 1.5rem;
+    @include vbox-md { font-size: 1.0625rem; }
+}
+.vbox-testimonial-quote::before { content: '\201C'; font-size: 2rem; color: $vbox-red; display: block; margin-bottom: 0.5rem; font-style: normal; }
+.vbox-testimonial-name { font-weight: 700; font-size: 0.875rem; }
+.vbox-testimonial-role { font-size: 0.75rem; color: $vbox-text-tertiary; }
+
+// === SERVICES ===
+.vbox-services-grid {
+    display: grid; gap: 0;
+    @include vbox-md { grid-template-columns: repeat(2, 1fr); }
+    @include vbox-lg { grid-template-columns: repeat(3, 1fr); }
+}
+.vbox-service-card {
+    border: 1px solid $vbox-border-subtle; padding: 2rem; text-align: center;
+    transition: border-color 0.15s;
+    &:hover { border-color: $vbox-black; }
+}
+.vbox-service-icon {
+    width: 3rem; height: 3rem; @include vbox-flex-center;
+    margin: 0 auto 1rem; font-size: 1.5rem; color: $vbox-red;
+}
+.vbox-service-title {
+    font-family: $vbox-font-display; font-size: 1.125rem; margin-bottom: 0.75rem;
+}
+.vbox-service-desc { font-size: 0.875rem; color: $vbox-text-secondary; line-height: 1.6; }
+.vbox-service-price {
+    font-family: $vbox-font-display; font-size: 1.5rem; margin-top: 1rem;
+    color: $vbox-black;
+}
+
+// === TIMELINE ===
+.vbox-timeline { position: relative; padding-left: 2rem; }
+.vbox-timeline::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 2px; background: $vbox-black;
+}
+.vbox-timeline-item { position: relative; padding-bottom: 2rem; }
+.vbox-timeline-dot {
+    position: absolute; left: -2rem; top: 0.375rem;
+    width: 10px; height: 10px; background: $vbox-black;
+    border: 2px solid $vbox-white;
+}
+.vbox-timeline-item.current .vbox-timeline-dot { background: $vbox-red; }
+.vbox-timeline-date { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: $vbox-text-tertiary; margin-bottom: 0.25rem; }
+.vbox-timeline-title { font-family: $vbox-font-display; font-size: 1.125rem; line-height: 1.2; }
+.vbox-timeline-company { font-weight: 600; color: $vbox-red; font-size: 0.9375rem; margin-bottom: 0.25rem; }
+.vbox-timeline-desc { font-size: 0.875rem; color: $vbox-text-secondary; line-height: 1.6; }
+
+// === CONTACT ===
+.vbox-contact-grid {
+    display: grid; gap: 0;
+    @include vbox-lg { grid-template-columns: 1fr 1.5fr; }
+}
+.vbox-contact-info { border-right: 2px solid $vbox-black; padding-right: 2rem; @include vbox-max-md { border-right: none; border-bottom: 2px solid $vbox-black; padding-right: 0; padding-bottom: 2rem; } }
+.vbox-contact-item { display: flex; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid $vbox-border-subtle; }
+.vbox-contact-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: $vbox-text-tertiary; margin-bottom: 0.25rem; }
+.vbox-contact-value { font-weight: 600; }
+.vbox-contact-form { padding: 2rem; }
+.vbox-form-group { margin-bottom: 1.25rem; }
+.vbox-form-row { display: grid; grid-template-columns: 1fr; gap: 1.25rem; @include vbox-sm { grid-template-columns: repeat(2, 1fr); } }
+
+// === FOOTER ===
+.vbox-footer {
+    background: $vbox-black; color: $vbox-white; border-top: 2px solid $vbox-black;
+    padding: 3rem 0 0; margin-top: 0;
+}
+.vbox-footer-grid {
+    display: grid; gap: 2rem;
+    @include vbox-md { grid-template-columns: repeat(2, 1fr); }
+    @include vbox-lg { grid-template-columns: 2fr 1fr 1fr 1fr; }
+}
+.vbox-footer-brand { font-family: $vbox-font-display; font-size: 1.25rem; text-transform: uppercase; margin-bottom: 1rem; }
+.vbox-footer-brand span { color: $vbox-red; }
+.vbox-footer-desc { font-size: 0.875rem; color: $vbox-text-tertiary; line-height: 1.6; max-width: 300px; }
+.vbox-footer-heading {
+    font-size: 0.6875rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.12em; color: $vbox-text-tertiary; margin-bottom: 1rem;
+}
+.vbox-footer-link {
+    display: block; padding: 0.375rem 0; font-size: 0.875rem;
+    color: rgba(255,255,255,0.7); transition: color 0.15s;
+    &:hover { color: $vbox-red; }
+}
+.vbox-footer-bottom {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 0; margin-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    font-size: 0.75rem; color: $vbox-text-tertiary;
+    flex-direction: column; gap: 0.75rem;
+    @include vbox-md { flex-direction: row; }
+}
+.vbox-footer-social { display: flex; gap: 0.75rem; }
+.vbox-footer-social-link {
+    width: 2rem; height: 2rem; @include vbox-flex-center;
+    border: 1px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.7);
+    transition: all 0.15s;
+    &:hover { background: $vbox-red; border-color: $vbox-red; color: $vbox-white; }
+}
+
+// === UTILITIES ===
+.vbox-text-red { color: $vbox-red; }
+.vbox-text-secondary { color: $vbox-text-secondary; }
+.vbox-text-tertiary { color: $vbox-text-tertiary; }
+.vbox-text-white { color: $vbox-white; }
+.vbox-bg-black { background: $vbox-black; }
+.vbox-bg-surface { background: $vbox-surface; }
+.vbox-border-top { border-top: 2px solid $vbox-black; }
+.vbox-border-bottom { border-bottom: 2px solid $vbox-black; }
+.vbox-hidden { display: none; }
+.vbox-flex { display: flex; }
+.vbox-flex-wrap { flex-wrap: wrap; }
+.vbox-items-center { align-items: center; }
+.vbox-justify-between { justify-content: space-between; }
+.vbox-gap-1 { gap: 0.25rem; }
+.vbox-gap-2 { gap: 0.5rem; }
+.vbox-gap-4 { gap: 1rem; }
+.vbox-gap-6 { gap: 1.5rem; }
+.vbox-gap-8 { gap: 2rem; }
+.vbox-mt-4 { margin-top: 1rem; }
+.vbox-mt-6 { margin-top: 1.5rem; }
+.vbox-mt-8 { margin-top: 2rem; }
+.vbox-mb-4 { margin-bottom: 1rem; }
+.vbox-mb-6 { margin-bottom: 1.5rem; }
+.vbox-mb-8 { margin-bottom: 2rem; }
+.vbox-py-section { padding-top: 3rem; padding-bottom: 3rem; @include vbox-md { padding-top: 4rem; padding-bottom: 4rem; } @include vbox-lg { padding-top: 6rem; padding-bottom: 6rem; } }
+
+// === RED UNDERLINE ACCENT ===
+.vbox-accent-underline {
+    position: relative; display: inline-block;
+    &::after {
+        content: ''; position: absolute; bottom: -2px; left: 0; width: 100%;
+        height: 3px; background: $vbox-red;
+    }
+}
+
+// === PULL QUOTE ===
+.vbox-pullquote {
+    border-left: 4px solid $vbox-red; padding: 1.5rem 2rem;
+    font-size: 1.25rem; font-style: italic; color: $vbox-text-secondary;
+    line-height: 1.65; margin: 2rem 0;
+    @include vbox-md { font-size: 1.375rem; }
+}
+
+// === ANIMATIONS (GSAP-compatible classes) ===
+.vbox-reveal { opacity: 0; transform: translateY(40px); }
+.vbox-reveal-left { opacity: 0; transform: translateX(-40px); }
+.vbox-reveal-right { opacity: 0; transform: translateX(40px); }
+.vbox-reveal-scale { opacity: 0; transform: scale(0.95); }
+.vbox-stagger-child { opacity: 0; transform: translateY(20px); }
+
+// === REDUCED MOTION ===
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+    .vbox-reveal, .vbox-reveal-left, .vbox-reveal-right, .vbox-reveal-scale, .vbox-stagger-child {
+        opacity: 1 !important; transform: none !important;
+    }
+}
+
+// === ACCESSIBILITY ===
+.sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+.skip-link {
+    position: absolute; top: -100%; left: 1rem; z-index: 9999;
+    padding: 0.75rem 1.5rem; background: $vbox-black; color: $vbox-white;
+    font-weight: 700; text-transform: uppercase; font-size: 0.875rem;
+    &:focus { top: 1rem; }
+}
+*:focus-visible { outline: 2px solid $vbox-white; outline-offset: 2px; box-shadow: 0 0 0 4px $vbox-black; }
+
+// === RESPONSIVE UTILITIES ===
+.vbox-hide-mobile { display: none; @include vbox-md { display: block; } }
+.vbox-hide-desktop { display: block; @include vbox-lg { display: none; } }

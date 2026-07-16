@@ -1,0 +1,17 @@
+.dropdown { position: relative; }
+.dropdown-menu {
+    position: absolute; top: 100%; right: 0; min-width: 12rem;
+    background: var(--surface); border: 1px solid var(--border-color);
+    border-radius: var(--radius); box-shadow: var(--shadow-lg);
+    z-index: var(--z-dropdown); padding: 0.375rem;
+    opacity: 0; pointer-events: none; transform: translateY(4px); transition: all var(--transition);
+    &.active { opacity: 1; pointer-events: auto; transform: translateY(0); }
+}
+.dropdown-item {
+    display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-sm); font-size: 0.875rem; color: var(--text-primary);
+    transition: background var(--transition); width: 100%;
+    &:hover { background: var(--bg-tertiary); }
+    &.danger { color: var(--color-danger); }
+}
+.dropdown-divider { height: 1px; background: var(--border-color); margin: 0.375rem 0; }

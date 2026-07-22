@@ -106,7 +106,11 @@ class AdminPostController extends Controller
         ]);
 
         if ($request->hasFile('featured_image')) {
-            $validated['featured_image'] = $this->media->replace($post->featured_image, $request->file('featured_image'), 'blog');
+            if ($post->featured_image) {
+                $validated['featured_image'] = $this->media->replace($post->featured_image, $request->file('featured_image'), 'blog');
+            } else {
+                $validated['featured_image'] = $this->media->upload($request->file('featured_image'), 'blog');
+            }
         }
 
         $validated['slug'] = $validated['slug'] ?? Str::slug($validated['name']);

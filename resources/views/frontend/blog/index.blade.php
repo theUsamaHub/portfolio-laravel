@@ -101,7 +101,7 @@
         align-items: center;
         justify-content: center;
         font-family: var(--font-display);
-        font-size: 3rem;
+        font-size: 2rem;
         color: var(--vb-gray-300);
     }
     .vb-blog__filter {
@@ -144,6 +144,10 @@
         list-style: none;
         padding: 0;
         margin: 0;
+        align-items: center;
+    }
+    .vb-blog__pagination .page-item {
+        display: flex;
     }
     .vb-blog__pagination .page-link {
         display: flex;
@@ -157,6 +161,12 @@
         font-weight: 600;
         color: var(--vb-black);
         transition: all 0.3s;
+        text-decoration: none;
+    }
+    .vb-blog__pagination .page-link svg,
+    .vb-blog__pagination .page-link span[aria-hidden] {
+        width: 16px;
+        height: 16px;
     }
     .vb-blog__pagination .page-link:hover {
         background: var(--vb-black);

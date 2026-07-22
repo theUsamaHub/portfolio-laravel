@@ -127,7 +127,11 @@ class AdminProjectController extends Controller
         ]);
 
         if ($request->hasFile('thumbnail')) {
-            $validated['thumbnail'] = $this->media->replace($project->thumbnail, $request->file('thumbnail'), 'projects');
+            if ($project->thumbnail) {
+                $validated['thumbnail'] = $this->media->replace($project->thumbnail, $request->file('thumbnail'), 'projects');
+            } else {
+                $validated['thumbnail'] = $this->media->upload($request->file('thumbnail'), 'projects');
+            }
         }
 
         $validated['slug'] = $validated['slug'] ?? Str::slug($validated['name']);

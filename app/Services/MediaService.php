@@ -27,9 +27,11 @@ class MediaService
         return false;
     }
 
-    public function replace(string $oldPath, $newFile, string $folder = 'uploads'): string
+    public function replace(?string $oldPath, $newFile, string $folder = 'uploads'): string
     {
-        $this->delete($oldPath);
+        if ($oldPath) {
+            $this->delete($oldPath);
+        }
         return $this->upload($newFile, $folder);
     }
 }

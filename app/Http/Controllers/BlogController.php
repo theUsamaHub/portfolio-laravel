@@ -4,54 +4,62 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\BlogCategory;
-use App\Models\Tag;
-use App\Models\PageView;
-use Illuminate\Http\Request;
+use App\Models\NavigationMenu;
+use App\Models\SocialLink;
+use App\Models\ContactSetting;
+use App\Models\SiteSetting;
 
 class BlogController extends Controller
 {
-    public function index(Request $request)
+    private function sharedData(): array
     {
-        $query = Post::published()->ordered()->with('category', 'author', 'tags');
+        $navigation = NavigationMenu::active()->topLevel()->ordered()->with('children')->get();
+        $socialLinks = SocialLink::active()->ordered()->get();
+        $contact = ContactSetting::active()->first();
 
-        if ($request->has('category') && $request->category) {
-            $query->whereHas('category', fn($q) => $q->where('slug', $request->category));
-        }
+        $settings = [
+            'site_name'        => SiteSetting::get('site_name', 'Portfolio'),
+            'site_tagline'     => SiteSetting::get('site_tagline', ''),
+            'site_description' => SiteSetting::get('site_description', ''),
+            'site_email'       => SiteSetting::get('site_email', ''),
+            'footer_copyright' => SiteSetting::get('footer_copyright', ''),
+        ];
 
-        if ($request->has('tag') && $request->tag) {
-            $query->whereHas('tags', fn($q) => $q->where('slug', $request->tag));
-        }
+        return compact('navigation', 'socialLinks', 'contact', 'settings');
+    }
 
-        if ($request->has('search')) {
-            $query->where('name', 'ilike', "%{$request->search}%");
-        }
-
-        $posts = $query->paginate(12);
+    public function index()
+    {
         $categories = BlogCategory::active()->ordered()->withCount('posts')->get();
-        $tags = Tag::has('posts')->orderBy('name')->get();
 
-        return view('blog.index', compact('posts', 'categories', 'tags'));
+        $posts = Post::published()
+            ->ordered()
+            ->with(['category', 'tags', 'author'])
+            ->paginate(9)
+            ->withQueryString();
+
+        return view('frontend.blog.index', array_merge($this->sharedData(), compact('posts', 'categories')));
     }
 
     public function show(Post $post)
     {
-        if ($post->status !== 'published') {
-            abort(404);
-        }
+        abort_unless($post->status === 'published', 404);
 
-        $post->increment('views_count');
-        $post->load(['category', 'author', 'tags']);
+        $post->load(['category', 'tags', 'author']);
 
         $relatedPosts = Post::published()
             ->where('id', '!=', $post->id)
-            ->where('blog_category_id', $post->blog_category_id)
-            ->ordered()
-            ->limit(3)
-            ->with('category', 'author')
+            ->with(['category', 'author'])
+            ->latest('published_at')
+            ->limit(5)
             ->get();
 
-        PageView::record(request()->path());
+        $recentPosts = Post::published()
+            ->where('id', '!=', $post->id)
+            ->latest('published_at')
+            ->limit(5)
+            ->get();
 
-        return view('blog.show', compact('post', 'relatedPosts'));
+        return view('frontend.blog.show', array_merge($this->sharedData(), compact('post', 'relatedPosts', 'recentPosts')));
     }
 }

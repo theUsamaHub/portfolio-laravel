@@ -38,7 +38,7 @@ class SiteSettingsSeeder extends Seeder
             ['key' => 'contact_map_embed', 'value' => '', 'type' => 'text', 'group' => 'contact', 'sort_order' => 4],
 
             // Footer
-            ['key' => 'footer_copyright', 'value' => '© 2025 Usama Developer. All Rights Reserved.', 'type' => 'text', 'group' => 'footer', 'sort_order' => 0],
+            ['key' => 'footer_copyright', 'value' => '© ' . date('Y') . ' Usama. All Rights Reserved.', 'type' => 'text', 'group' => 'footer', 'sort_order' => 0],
             ['key' => 'footer_tagline', 'value' => 'Building digital experiences that matter.', 'type' => 'text', 'group' => 'footer', 'sort_order' => 1],
             ['key' => 'footer_show_social', 'value' => '1', 'type' => 'boolean', 'group' => 'footer', 'sort_order' => 2],
 

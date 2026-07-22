@@ -5,53 +5,69 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\ProjectCategory;
 use App\Models\Tag;
-use App\Models\PageView;
-use Illuminate\Http\Request;
+use App\Models\SocialLink;
+use App\Models\NavigationMenu;
+use App\Models\ContactSetting;
+use App\Models\SiteSetting;
 
 class ProjectController extends Controller
 {
-    public function index(Request $request)
+    private function sharedData(): array
     {
-        $query = Project::published()->ordered()->with('category', 'technologies', 'tags');
+        $navigation = NavigationMenu::active()->topLevel()->ordered()->with('children')->get();
+        $socialLinks = SocialLink::active()->ordered()->get();
+        $contact = ContactSetting::active()->first();
 
-        if ($request->has('category') && $request->category) {
-            $query->whereHas('category', fn($q) => $q->where('slug', $request->category));
-        }
+        $settings = [
+            'site_name'        => SiteSetting::get('site_name', 'Portfolio'),
+            'site_tagline'     => SiteSetting::get('site_tagline', ''),
+            'site_description' => SiteSetting::get('site_description', ''),
+            'site_email'       => SiteSetting::get('site_email', ''),
+            'footer_copyright' => SiteSetting::get('footer_copyright', ''),
+        ];
 
-        if ($request->has('tag') && $request->tag) {
-            $query->whereHas('tags', fn($q) => $q->where('slug', $request->tag));
-        }
+        return compact('navigation', 'socialLinks', 'contact', 'settings');
+    }
 
-        if ($request->has('search')) {
-            $query->where('name', 'ilike', "%{$request->search}%");
-        }
+    public function index()
+    {
+        $categories = ProjectCategory::active()->ordered()->withCount('projects')->get();
+        $tags = Tag::whereHas('projects', fn($q) => $q->published())->withCount('projects')->orderBy('name')->get();
 
-        $projects = $query->paginate(12);
-        $categories = ProjectCategory::active()->ordered()->get();
-        $tags = Tag::has('projects')->orderBy('name')->get();
+        $projects = Project::published()
+            ->ordered()
+            ->with(['category', 'technologies', 'tags'])
+            ->paginate(9)
+            ->withQueryString();
 
-        return view('projects.index', compact('projects', 'categories', 'tags'));
+        return view('frontend.projects.index', array_merge($this->sharedData(), compact('projects', 'categories', 'tags')));
     }
 
     public function show(Project $project)
     {
-        if ($project->status !== 'published') {
-            abort(404);
-        }
+        abort_unless($project->status === 'published', 404);
 
-        $project->increment('views_count');
         $project->load(['category', 'technologies', 'tags', 'gallery']);
 
         $relatedProjects = Project::published()
             ->where('id', '!=', $project->id)
             ->where('project_category_id', $project->project_category_id)
+            ->with(['category', 'technologies'])
             ->ordered()
             ->limit(3)
-            ->with('category', 'technologies')
             ->get();
 
-        PageView::record(request()->path());
+        if ($relatedProjects->count() < 3) {
+            $more = Project::published()
+                ->where('id', '!=', $project->id)
+                ->whereNotIn('id', $relatedProjects->pluck('id')->push($project->id))
+                ->with(['category', 'technologies'])
+                ->ordered()
+                ->limit(3 - $relatedProjects->count())
+                ->get();
+            $relatedProjects = $relatedProjects->concat($more);
+        }
 
-        return view('projects.show', compact('project', 'relatedProjects'));
+        return view('frontend.projects.show', array_merge($this->sharedData(), compact('project', 'relatedProjects')));
     }
 }

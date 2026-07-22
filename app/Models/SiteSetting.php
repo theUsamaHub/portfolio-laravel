@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\BaseModel;
+use Illuminate\Support\Facades\Schema;
 
 class SiteSetting extends BaseModel
 {
@@ -12,21 +13,29 @@ class SiteSetting extends BaseModel
 
     public static function get(string $key, mixed $default = null): mixed
     {
+        if (!Schema::hasTable('site_settings')) {
+            return $default;
+        }
+
         $setting = static::where('key', $key)->first();
         if (!$setting) return $default;
         return $setting->castValue();
     }
 
-    public static function set(string $key, mixed $value, string $type = 'text'): static
+    public static function set(string $key, mixed $value, string $type = 'text', string $group = 'general'): static
     {
         return static::updateOrCreate(
             ['key' => $key],
-            ['value' => is_array($value) ? json_encode($value) : $value, 'type' => $type]
+            ['value' => is_array($value) ? json_encode($value) : $value, 'type' => $type, 'group' => $group]
         );
     }
 
     public static function getGroup(string $group): \Illuminate\Support\Collection
     {
+        if (!Schema::hasTable('site_settings')) {
+            return collect();
+        }
+
         return static::where('group', $group)->orderBy('sort_order')->get();
     }
 
@@ -45,7 +54,7 @@ class SiteSetting extends BaseModel
         foreach ($settings as $key => $value) {
             static::updateOrCreate(
                 ['key' => $key],
-                ['value' => $value, 'group' => $group]
+                ['value' => $value, 'group' => $group, 'type' => 'text']
             );
         }
     }

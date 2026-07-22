@@ -9,11 +9,15 @@ use App\Http\Controllers\Admin\AdminHeroController;
 use App\Http\Controllers\Admin\AdminAboutController;
 use App\Http\Controllers\Admin\AdminSkillController;
 use App\Http\Controllers\Admin\AdminContentController;
+use App\Http\Controllers\Admin\ImageUploadController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified'])->group(function () {
     // Dashboard
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
+
+    // Image Upload
+    Route::post('/upload/image', [ImageUploadController::class, 'store'])->name('upload.image');
 
     // Content Management
     Route::get('/hero', [AdminHeroController::class, 'edit'])->name('hero.edit');

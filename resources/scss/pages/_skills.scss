@@ -1,9 +1,0 @@
-.skills { @include section-padding; background: var(--bg-secondary); }
-.skills-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; @include respond-to('md') { grid-template-columns: repeat(2, 1fr); } @include respond-to('lg') { grid-template-columns: repeat(3, 1fr); gap: 2rem; } }
-.skill-card { @include card; }
-.skill-card-header { @include flex-between; margin-bottom: 1rem; }
-.skill-card-name { font-weight: 600; }
-.skill-bar { height: 8px; background: var(--bg-tertiary); border-radius: var(--radius-full); overflow: hidden; }
-.skill-bar-fill { height: 100%; background: linear-gradient(90deg, var(--color-primary), var(--color-secondary)); border-radius: var(--radius-full); transition: width 1s ease; }
-.skill-icons { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem; }
-.skill-icon { @include flex-center; padding: 0.5rem; border: 1px solid var(--border-color); border-radius: var(--radius); font-size: 1.5rem; }

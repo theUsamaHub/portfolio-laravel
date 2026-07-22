@@ -7,10 +7,10 @@ export default defineConfig({
             input: [
                 'resources/css/app.scss',
                 'resources/css/admin.scss',
-                'resources/css/voicebox.scss',
+                'resources/css/frontend.scss',
                 'resources/js/app.js',
                 'resources/js/admin.js',
-                'resources/js/voicebox.js',
+                'resources/js/frontend.js',
             ],
             refresh: true,
         }),

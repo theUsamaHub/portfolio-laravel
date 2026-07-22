@@ -9,10 +9,14 @@ class SeoHelper
 {
     public static function get(string $page): array
     {
-        $seo = Cache::remember("seo_{$page}", 3600, function () use ($page) {
-            $model = SeoSetting::where('page', $page)->first();
-            return $model ? $model->toArray() : null;
-        });
+        $seo = null;
+
+        if (SeoSetting::tableExists()) {
+            $seo = Cache::remember("seo_{$page}", 3600, function () use ($page) {
+                $model = SeoSetting::where('page', $page)->first();
+                return $model ? $model->toArray() : null;
+            });
+        }
 
         $siteName = SettingHelper::get('site_name', 'Portfolio');
 

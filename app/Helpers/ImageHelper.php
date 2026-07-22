@@ -13,7 +13,11 @@ class ImageHelper
             return asset('storage/' . $path);
         }
 
-        return DefaultImage::getUrl($fallbackKey);
+        if (DefaultImage::tableExists()) {
+            return DefaultImage::getUrl($fallbackKey);
+        }
+
+        return asset('images/defaults/' . $fallbackKey . '.svg');
     }
 
     public static function render(string $path, string $fallbackKey = 'default', string $alt = '', string $class = '', array $attributes = []): string

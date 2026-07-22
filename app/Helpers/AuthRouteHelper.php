@@ -7,16 +7,23 @@ use Illuminate\Support\Facades\Cache;
 
 class AuthRouteHelper
 {
+    private static array $defaults = [
+        'login' => 'a9x7k2m8',
+        'register' => '7f3a9b2c',
+        'forgot_password' => 'x4k8m2n9',
+        'reset_password' => 'r7p3w5q1',
+    ];
+
     public static function getPath(string $route): string
     {
-        return Cache::remember("auth_route_{$route}", 3600, function () use ($route) {
-            return SiteSetting::get("auth_{$route}_path", match($route) {
-                'login' => 'a9x7k2m8',
-                'register' => '7f3a9b2c',
-                'forgot_password' => 'x4k8m2n9',
-                'reset_password' => 'r7p3w5q1',
-                default => 'login',
-            });
+        $default = self::$defaults[$route] ?? 'login';
+
+        if (!SiteSetting::tableExists()) {
+            return $default;
+        }
+
+        return Cache::remember("auth_route_{$route}", 3600, function () use ($route, $default) {
+            return SiteSetting::get("auth_{$route}_path", $default);
         });
     }
 

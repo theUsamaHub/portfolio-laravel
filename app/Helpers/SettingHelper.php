@@ -9,6 +9,10 @@ class SettingHelper
 {
     public static function get(string $key, mixed $default = null): mixed
     {
+        if (!SiteSetting::tableExists()) {
+            return $default;
+        }
+
         $cacheKey = "setting_{$key}";
 
         return Cache::remember($cacheKey, 3600, function () use ($key, $default) {
@@ -31,6 +35,10 @@ class SettingHelper
 
     public static function clearCache(): void
     {
+        if (!SiteSetting::tableExists()) {
+            return;
+        }
+
         $settings = SiteSetting::all();
         foreach ($settings as $setting) {
             Cache::forget("setting_{$setting->key}");
